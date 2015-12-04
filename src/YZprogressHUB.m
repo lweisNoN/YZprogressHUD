@@ -9,7 +9,12 @@
 #import "YZprogressHUB.h"
 
 @interface YZprogressHUB()
+@property (nonatomic) UIView *hubView;
+@property (nonatomic) UIWebView *progressGIFWebVIew;
 
+@property (nonatomic) UIActivityIndicatorView *acticityIndicator;
+@property (nonatomic) UILabel *textLabel;
+@property (nonatomic) NSData *gifData;
 @end
 
 @implementation YZprogressHUB
@@ -17,6 +22,21 @@
 #pragma mark - pubilc methods
 + (instancetype)showHUDAddedTo:(UIView *)view animated:(BOOL)animated {
     YZprogressHUB *hud = [[self alloc] initWithView:view];
+    
+    [view addSubview:hud];
+    [hud show:animated];
+    return hud;
+}
+
++ (instancetype)showHUDAddedTo:(UIView *)view withGifViewFrame:(CGRect)frame andGifData:(NSData *)data animated:(BOOL)animated {
+    YZprogressHUB *hud = [[self alloc] initWithView:view];
+    
+    if (data != nil) {
+        hud.gifData = data;
+        hud.progressGIFWebVIew = [[UIWebView alloc] initWithFrame:frame];
+        [hud addSubview:hud.progressGIFWebVIew];
+    }
+
     [view addSubview:hud];
     [hud show:animated];
     return hud;
@@ -38,6 +58,11 @@
 - (void)setColor:(UIColor *)backgroundColor
 {
     [_hubView setBackgroundColor:backgroundColor];
+}
+
+- (void)setText:(NSString *)text
+{
+    _textLabel.text = text;;
 }
 
 #pragma mark - private methods
@@ -70,10 +95,37 @@
 
 - (void)show:(BOOL)animated {
     if (animated) {
-        [self.acticityIndicator startAnimating];
+        if (self.progressGIFWebVIew != nil) {
+            [self startAnimating];
+        } else {
+            [self.acticityIndicator startAnimating];
+        }
     } else {
-        [self.acticityIndicator stopAnimating];
+        if (self.progressGIFWebVIew != nil) {
+            [self stopAnimating];
+        } else {
+            [self.acticityIndicator stopAnimating];
+        }
     }
+}
+
+#pragma mark load gif
+- (void) startAnimating
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.progressGIFWebVIew.backgroundColor = [UIColor clearColor];
+        [self.progressGIFWebVIew setOpaque:NO];
+        self.progressGIFWebVIew.scalesPageToFit = YES;
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-unused-variable"
+        [self.progressGIFWebVIew loadData:self.gifData MIMEType:@"image/gif" textEncodingName:nil baseURL:nil];
+#pragma clang diagnostic pop
+    });
+}
+
+- (void)stopAnimating
+{
+    [self.progressGIFWebVIew removeFromSuperview];
 }
 
 #pragma mark - getters & stters
@@ -81,8 +133,12 @@
 {
     if (!_hubView) {
         _hubView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
-        [_hubView addSubview:self.acticityIndicator];
-        [_hubView addSubview:self.textLabel];
+        
+        if (_progressGIFWebVIew == nil) {
+            [_hubView addSubview:self.acticityIndicator];
+            [_hubView addSubview:self.textLabel];
+        }
+
     }
     
     return _hubView;
