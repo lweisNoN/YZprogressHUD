@@ -1,6 +1,6 @@
 # YZprogressHUB
 ## Overview
-在指定的页面添加蒙板，可以设置GIF和文本属性。
+在指定的页面添加GIF蒙板，设置GIF图或者文本的属性。
 ## Basic usage
 初始化
 
