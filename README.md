@@ -18,3 +18,6 @@
     [YZprogressHUB hideHUDForView];
     [YZprogressHUB hideHUDForView:self.view afterDelay:0.7];
 
+## License
+MIT
+
