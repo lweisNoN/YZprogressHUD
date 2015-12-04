@@ -10,7 +10,7 @@
     self.yhub = [YZprogressHUB showHUDAddedTo:self.view animated:YES];
 添加自定义GIF蒙板到你的视图
 
-     self.yhub = [YZprogressHUB showHUDAddedTo:self.searchTableView withGifViewFrame:yourframe andGifData:gifData animated:YES];
+     self.yhub = [YZprogressHUB showHUDAddedTo:self.view withGifViewFrame:yourframe andGifData:gifData animated:YES];
 
 
 移除本视图蒙板
