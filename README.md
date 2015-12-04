@@ -5,9 +5,14 @@
 初始化
 
     @property (strong, nonatomic) YZprogressHUB *yhub;
-添加蒙板到你的视图
+添加默认蒙板到你的视图
 
-    self.yhub = [YZprogressHUB showHUDAddedTo:self.view animated:YES];   
+    self.yhub = [YZprogressHUB showHUDAddedTo:self.view animated:YES];
+添加自定义GIF蒙板到你的视图
+
+     self.yhub = [YZprogressHUB showHUDAddedTo:self.searchTableView withGifViewFrame:yourframe andGifData:gifData animated:YES];
+
+
 移除本视图蒙板
 
     [YZprogressHUB hideHUDForView];
