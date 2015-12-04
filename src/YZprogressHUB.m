@@ -9,9 +9,6 @@
 #import "YZprogressHUB.h"
 
 @interface YZprogressHUB()
-@property (nonatomic) UIView *hubView;
-@property (nonatomic) UIActivityIndicatorView *acticityIndicator;
-@property (nonatomic) UILabel *textLabel;
 
 @end
 
@@ -27,11 +24,11 @@
 
 + (void)hideHUDForView:(UIView *)view afterDelay:(NSTimeInterval)delay {
     
-    [self performSelector:@selector(hideDelayed:) withObject:view afterDelay:delay];
+    [self performSelector:@selector(hideHUDForView:) withObject:view afterDelay:delay];
    
 }
 
-+ (void)hideDelayed:(UIView *)view {
++ (void)hideHUDForView:(UIView *)view {
     YZprogressHUB *hud = [self HUDForView:view];
     if (hud != nil) {
         [hud removeFromSuperview];
