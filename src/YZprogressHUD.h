@@ -23,7 +23,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface YZprogressHUB : UIView
+@interface YZprogressHUD : UIView
 
 //property setters
 - (void)setColor:(UIColor *)backgroundColor;
