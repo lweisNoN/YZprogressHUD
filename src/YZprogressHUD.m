@@ -1,4 +1,3 @@
-
 // The MIT License (MIT)
 //
 // Copyright (c) 2015-2016 lweisNoN ( https://github.com/lweisNoN )
@@ -21,9 +20,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#import "YZprogressHUB.h"
+#import "YZprogressHUD.h"
 
-@interface YZprogressHUB()
+@interface YZprogressHUD()
 @property (nonatomic) UIView *hubView;
 @property (nonatomic) UIWebView *progressGIFWebVIew;
 
@@ -32,11 +31,11 @@
 @property (nonatomic) NSData *gifData;
 @end
 
-@implementation YZprogressHUB
+@implementation YZprogressHUD
 
 #pragma mark - pubilc methods
 + (instancetype)showHUDAddedTo:(UIView *)view animated:(BOOL)animated {
-    YZprogressHUB *hud = [[self alloc] initWithView:view];
+    YZprogressHUD *hud = [[self alloc] initWithView:view];
     
     [view addSubview:hud];
     [hud show:animated];
@@ -44,7 +43,7 @@
 }
 
 + (instancetype)showHUDAddedTo:(UIView *)view withGifViewFrame:(CGRect)frame andGifData:(NSData *)data animated:(BOOL)animated {
-    YZprogressHUB *hud = [[self alloc] initWithView:view];
+    YZprogressHUD *hud = [[self alloc] initWithView:view];
     
     if (data != nil) {
         hud.gifData = data;
@@ -64,7 +63,7 @@
 }
 
 + (void)hideHUDForView:(UIView *)view {
-    YZprogressHUB *hud = [self HUDForView:view];
+    YZprogressHUD *hud = [self HUDForView:view];
     if (hud != nil) {
         [hud removeFromSuperview];
     }
@@ -102,7 +101,7 @@
     NSEnumerator *subviewsEnum = [view.subviews reverseObjectEnumerator];
     for (UIView *subview in subviewsEnum) {
         if ([subview isKindOfClass:self]) {
-            return (YZprogressHUB *)subview;
+            return (YZprogressHUD *)subview;
         }
     }
     return nil;
