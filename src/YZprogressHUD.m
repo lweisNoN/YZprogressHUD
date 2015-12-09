@@ -46,9 +46,17 @@
     YZprogressHUD *hud = [[self alloc] initWithView:view];
     
     if (data != nil) {
+        hud.textLabel.hidden = YES;
         hud.gifData = data;
         hud.progressGIFWebVIew = [[UIWebView alloc] initWithFrame:frame];
+        hud.progressGIFWebVIew.backgroundColor = [UIColor clearColor];
+        [hud.progressGIFWebVIew setOpaque:NO];
+        hud.progressGIFWebVIew.scalesPageToFit = YES;
+        hud.progressGIFWebVIew.userInteractionEnabled = NO;
+
         [hud addSubview:hud.progressGIFWebVIew];
+        
+        hud.textLabel.frame = CGRectMake(hud.textLabel.frame.origin.x, frame.origin.y + frame.size.height, 97, 23);
     }
 
     [view addSubview:hud];
@@ -127,12 +135,10 @@
 - (void) startAnimating
 {
     dispatch_async(dispatch_get_main_queue(), ^{
-        self.progressGIFWebVIew.backgroundColor = [UIColor clearColor];
-        [self.progressGIFWebVIew setOpaque:NO];
-        self.progressGIFWebVIew.scalesPageToFit = YES;
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-unused-variable"
         [self.progressGIFWebVIew loadData:self.gifData MIMEType:@"image/gif" textEncodingName:nil baseURL:nil];
+        self.textLabel.hidden = NO;
 #pragma clang diagnostic pop
     });
 }
