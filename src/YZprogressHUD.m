@@ -136,7 +136,7 @@
 {
     dispatch_async(dispatch_get_main_queue(), ^{
 #pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Warc-unused-variable"
+#pragma clang diagnostic ignored "-Wnonnull"
         [self.progressGIFWebVIew loadData:self.gifData MIMEType:@"image/gif" textEncodingName:nil baseURL:nil];
         self.textLabel.hidden = NO;
 #pragma clang diagnostic pop
