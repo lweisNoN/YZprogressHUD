@@ -8,7 +8,7 @@
 添加默认蒙板到你的视图
 
     self.lhud = [LHprogressHUD showHUDAddedTo:self.view animated:YES];
-添加自定义GIF蒙板到你的视图
+添加自定义全屏动画蒙板到你的视图
 
      self.lhud =  [LHprogressHUD showHUDAddedTo:self.view andGifViewFrame:fooFrame andGifImages:fooImageArray andHudBackGroudColor:fooColor];
 
